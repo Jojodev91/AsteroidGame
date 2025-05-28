@@ -15,18 +15,45 @@ def main():
     clock = pygame.time.Clock()
     dt = 0
 
+    
+    # Groups
+    updatable = pygame.sprite.Group()
+    drawable = pygame.sprite.Group()
+    Player.containers = (updatable, drawable)
+
     player_ship = Player(SCREEN_WIDTH/2, SCREEN_HEIGHT/2)
+
 
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return
         screen.fill("black")
-        player_ship.update(dt)
-        player_ship.draw(screen)
+        updatable.update(dt)
+        for draw in drawable:
+             draw.draw(screen)
         pygame.display.flip()
         dt = clock.tick(60)/1000
 
 
 if __name__ == "__main__":
         main()
+
+
+'''
+# Groups
+    updatable = pygame.sprite.Group()
+    drawable = pygame.sprite.Group()
+    player_ship.containers = (updatable, drawable)
+
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                return
+        screen.fill("black")
+        updatable.update(dt)
+        for draw in drawable:
+             draw.draw(screen)
+        pygame.display.flip()
+        dt = clock.tick(60)/1000
+'''
